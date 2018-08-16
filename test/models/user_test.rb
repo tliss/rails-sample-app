@@ -4,7 +4,8 @@ class UserTest < ActiveSupport::TestCase
 
   #This method is run before every "test" method
   def setup
-    @user = User.new(name: "Example User", email: "user@example.com")
+    @user = User.new(name: "Example User", email: "user@example.com",
+                     password: "foobar", password_confirmation: "foobar")
   end
 
   test "should be valid" do
