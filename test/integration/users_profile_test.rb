@@ -5,8 +5,6 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:michael)
-    @krieger = users(:krieger)
-    @malory = users(:malory)
   end
 
   test "profile display" do
@@ -25,11 +23,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", followers_user_path(@user)
     assert_select 'section.stats'
     assert_select 'div.stats'
-    @user.follow(@krieger)
-    @user.follow(@malory)
-    @krieger.follow(@user)
-    get user_path(@user)
-    assert_select 'strong#following.stat', text: @user.following.to_a.count.to_s
-    assert_select 'strong#followers.stat', text: @user.followers.to_a.count.to_s
+    assert_select 'strong#following.stat', text: @user.following.count.to_s
+    assert_select 'strong#followers.stat', text: @user.followers.count.to_s
   end
 end
